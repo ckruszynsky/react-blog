@@ -1,23 +1,13 @@
+.ui.main.text.container {
+  margin-top:50px;
+}
+
+.header.item {
+  border: none !important;
+}
 
 .App-logo {
   animation: App-logo-spin infinite alternate 10s linear;
-  height: 34px;
-}
-
-.App-header {
-  background-color: #222;  
-  margin-bottom: 20px;  
-  padding: 10px;
-  color: white;
-}
-
-.App-header > h2 {
-    display: inline;  
-    padding: 2px;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 @keyframes App-logo-spin {

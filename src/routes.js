@@ -10,7 +10,7 @@ const Routes = (
     <Router>    
         <App>    
             <Switch>            
-                <Route path="/" component={PostList} />
+                <Route exactPath="/" component={PostList} />
                 <Route path="/posts/:id" component={PostDetails} />
                 <Route path="/posts/new" component={NewPost} />
             </Switch>        

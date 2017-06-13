@@ -3,14 +3,20 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
-  render() {    
+  render() {
     return (
-      <div className="App">
-        <div className="App-header">          
-            <img src={logo} className="App-logo" alt="logo" />                    
-            <h2>React-Blog</h2>
+      <div>
+        <div className="ui inverted fixed menu">
+          <div className="ui container">
+            <a href="/" className="header item">
+              <img src={logo} className="logo App-logo" alt="logo" />
+              React-Blog
+            </a>
+          </div>
         </div>
-        {this.props.children}
+        <div className="ui main text container">
+          {this.props.children}
+        </div>        
       </div>
     );
   }
