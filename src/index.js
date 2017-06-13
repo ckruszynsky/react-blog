@@ -1,30 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import promise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter, Route } from 'react-router-dom';
-import reducers from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
-
-import App from './components/app/';
-import PostList from './components/posts/list.js';
-import NewPost from './components/posts/new.js';
-import PostDetails from './components/posts/details.js';
-
+import Routes from './routes';
 import './index.css';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const middleware = [promise];
+const store = createStore(reducer, composeWithDevTools(
+  applyMiddleware(...middleware),
+  // other store enhancers if any
+));
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
-     <BrowserRouter>
-        <div>            
-            <Route path="/posts/:id" component={PostDetails} />
-            <Route path="/posts/new" component={NewPost} />
-            <Route path="/" component={PostList} />
-            <App />
-        </div>        
-     </BrowserRouter>        
+    <Provider store={store}>
+        {Routes}
     </Provider>
     , document.getElementById('root'));
 registerServiceWorker();
