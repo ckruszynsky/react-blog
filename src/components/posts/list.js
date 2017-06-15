@@ -1,47 +1,53 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchPosts } from "../../actions/";
-import { Item } from "semantic-ui-react";
+import { Container, Item, Button, Icon, Grid, Divider } from "semantic-ui-react";
 import _ from "lodash";
-import Logo from '../app/logo.svg';
+import Logo from "../app/logo.svg";
+import ListItem from "./list-item";
 
 class PostList extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
-
   renderPosts() {
     return _.map(this.props.posts, post => {
-      return (
-        <Item key={post.id}>
-        <Item.Image size="tiny" src={Logo} />
-          <Item.Content>            
-            <Item.Header as="a">{post.title}</Item.Header>
-            <Item.Meta>Description</Item.Meta>
-            <Item.Description>    
-                {post.content}          
-            </Item.Description>
-            <Item.Extra>Additional Details</Item.Extra>
-            {post.categories}
-          </Item.Content>
-        </Item>
-      );
+      return <ListItem key={post.id} post={post} logo={Logo} />;
     });
   }
   render() {
     return (
-      <div>
-        <h1 className="ui header">Blog Posts</h1>
-        <Item.Group divided>
-          {this.renderPosts()}
-        </Item.Group>
-
-      </div>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column floated="left">
+              <h1 className="ui header">Posts</h1>
+            </Grid.Column>           
+            <Grid.Column width="3" floated="right">
+              <Link to="/posts/new">
+                <Button primary animated type="button">
+                  <Button.Content visible>Add New</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="add circle" />
+                  </Button.Content>
+                </Button>
+              </Link>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row />
+        </Grid>
+        <Divider />        
+          <Item.Group divided>
+            {this.renderPosts()}
+          </Item.Group>        
+      </Container>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return {
     posts: state.posts
   };

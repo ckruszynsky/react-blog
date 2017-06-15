@@ -9,10 +9,10 @@ import PostDetails from './components/posts/details.js';
 const Routes = (
     <Router>    
         <App>    
-            <Switch>            
-                <Route exactPath="/" component={PostList} />
-                <Route path="/posts/:id" component={PostDetails} />
+            <Switch>                                            
                 <Route path="/posts/new" component={NewPost} />
+                <Route path="/posts/:id" component={PostDetails} />
+                <Route path="/" component={PostList} />
             </Switch>        
         </App>
      </Router>

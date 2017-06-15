@@ -7,14 +7,14 @@ class App extends Component {
     return (
       <div>
         <div className="ui inverted fixed menu">
-          <div className="ui container">
+          <div className="ui grid container">
             <a href="/" className="header item">
               <img src={logo} className="logo App-logo" alt="logo" />
               React-Blog
             </a>
           </div>
         </div>
-        <div className="ui main text container">
+        <div className="ui main grid container">
           {this.props.children}
         </div>        
       </div>
