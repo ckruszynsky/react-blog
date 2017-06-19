@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import {
   Container,
   Button,
-  Form,  
+  Form,
   Divider,
   Icon,
   Grid,
@@ -28,8 +28,11 @@ class NewPost extends Component {
   }
   onSubmit(values) {
     //this === component
-    console.log(values);
-    this.props.savePost(values);
+    this.props.savePost(values, () => {
+      //automatically sends us back to the home page when
+      //action creator completes.
+      this.props.history.push("/");
+    });
   }
   render() {
     const { handleSubmit } = this.props;
@@ -119,4 +122,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: "PostsNewForm"
-})(connect(null,{savePost})(NewPost));
+})(connect(null, { savePost })(NewPost));

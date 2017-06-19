@@ -5,8 +5,6 @@ export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_POSTS:      
       return _.mapKeys(action.payload.data, "id");      
-    case SAVE_POST : 
-      return "";
     default:
       return state;
   }

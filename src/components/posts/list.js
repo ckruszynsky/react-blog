@@ -26,9 +26,11 @@ class PostList extends Component {
             </Grid.Column>           
             <Grid.Column width="3" floated="right">
               <Link to="/posts/new">
-                <Button primary animated type="button">
-                  <Button.Content visible>Add New</Button.Content>
-                  <Button.Content hidden>
+                <Button floated="right" 
+                        primary animated type="button"
+                        >
+                  <Button.Content hidden>Add New</Button.Content>
+                  <Button.Content visible>
                     <Icon name="add circle" />
                   </Button.Content>
                 </Button>
