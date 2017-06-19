@@ -8,17 +8,7 @@ const ListItem = ({ post, logo }) => {
       <Item.Content>
         <Item.Header as="a">{post.title}</Item.Header>
         <Item.Extra>Categories</Item.Extra>
-        {post.categories}
-        <Item.Extra>
-           <Button color="red" floated="right" animated type="button">
-                  <Button.Content visible>
-                    <Icon name="trash" />
-                  </Button.Content>
-                  <Button.Content hidden>
-                    Delete
-                  </Button.Content>
-           </Button>
-        </Item.Extra>
+        {post.categories}       
       </Item.Content>
     </Item>
   );
