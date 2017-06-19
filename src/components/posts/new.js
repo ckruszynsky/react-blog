@@ -26,7 +26,14 @@ class NewPost extends Component {
         />              
     );
   }
+  onSubmit(values){
+    //this === component
+    console.log(values);
+  }
   render() {
+    console.log(this.props);
+
+    const { handleSubmit } = this.props;
     return (
       <Container>
         <Header
@@ -61,7 +68,10 @@ class NewPost extends Component {
           <Grid columns={2}>
             <Grid.Row>
               <Grid.Column floated="left">
-                <Button primary animated type="submit">
+                <Button primary 
+                        animated 
+                        type="submit"
+                        onClick={handleSubmit(this.onSubmit.bind(this))}>
                   <Button.Content visible>Submit</Button.Content>
                   <Button.Content hidden>
                     <Icon name="save" />
