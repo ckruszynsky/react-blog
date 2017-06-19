@@ -7,14 +7,19 @@ import {
   TextArea,
   Divider,
   Icon,
-  Grid
+  Grid,
+  Header
 } from "semantic-ui-react";
 
 class NewPost extends Component {
   render() {
     return (
       <Container>
-        <h1 className="ui header">Create a New Post</h1>
+        <Header
+          as="h2"
+          content="New Post"
+          subheader="Create a new blog post here."
+        />
         <Divider />
         <Form>
           <Form.Input label="Title" placeholder="Enter a Title for the blog" />

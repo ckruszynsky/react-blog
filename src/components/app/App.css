@@ -7,7 +7,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite alternate 10s linear;
+  animation: App-logo-spin infinite 20s linear;
 }
 
 @keyframes App-logo-spin {
