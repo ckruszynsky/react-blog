@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -12,6 +13,17 @@ import {
 } from "semantic-ui-react";
 
 class NewPost extends Component {
+  renderField(field) {
+    return (
+      <Form.Input
+        label={field.label}
+        placeholder={field.placeholder}
+        control={field.control}
+        rows={field.rows}
+        {...field.input}
+      />
+    );
+  }
   render() {
     return (
       <Container>
@@ -22,16 +34,27 @@ class NewPost extends Component {
         />
         <Divider />
         <Form>
-          <Form.Input label="Title" placeholder="Enter a Title for the blog" />
-          <Form.Input
-            label="Categories"
-            placeholder="Development, C#, JavaScript..."
+          <Field
+            name="title"
+            label="Title"
+            placeholder="Enter a title for the blog"
+            control="input"
+            component={this.renderField}
           />
-          <Form.Field
-            label="Content"
-            placeholder="Enter the content of your blog here.."
-            control="textarea"
+          <Field
+            name="categories"
+            label="Categories"
+            placeholder="C#, Development, JavaScript, Web Development, etc.."
+            control="input"
+            component={this.renderField}
+          />
+          <Field
+            name="content"
+            label="Post Content"
+            placeholder="Enter the content of your blog post here..."
             rows="5"
+            control="textarea"
+            component={this.renderField}
           />
           <Grid columns={2}>
             <Grid.Row>
@@ -61,4 +84,26 @@ class NewPost extends Component {
   }
 }
 
-export default NewPost;
+function validate(values) {
+  const errors = {};
+
+  //validate inputs from 'values' object
+  if (!values.title || values.title.length < 3) {
+    errors.title = "Enter a title that is at least 3 characters long!";
+  }
+  if(!values.categories){
+    errors.categories = "Enter some categories!";
+  }
+
+  if(!values.content){
+    errors.content = "Enter content for the Blog post!";
+  }
+  //if errors is empty form is good to submit
+  //if errors has any properties, redux form assumes form is invalid
+  return errors;
+}
+
+export default reduxForm({
+  validate,
+  form: "PostsNewForm"
+})(NewPost);
