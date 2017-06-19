@@ -15,8 +15,8 @@ export const fetchPosts = () => {
     };
 }
 
-export const savePost = (post) => {    
-    const request = axios.post(REQUEST_URL, post);
+export const savePost = (values) => {    
+    const request = axios.post(REQUEST_URL, values);
     return {
         type: SAVE_POST,
         payload: request

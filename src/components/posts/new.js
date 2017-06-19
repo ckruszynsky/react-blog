@@ -1,38 +1,37 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { savePost } from "../../actions";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import {
   Container,
   Button,
-  Form,
-  TextArea,
+  Form,  
   Divider,
   Icon,
   Grid,
-  Header,
-  Message
+  Header
 } from "semantic-ui-react";
 
 class NewPost extends Component {
   renderField(field) {
-    return (    
-        <Form.Input
-          label={field.label}
-          placeholder={field.placeholder}
-          control={field.control}
-          rows={field.rows}
-          {...field.input}
-          error={!!field.meta.error}
-        />              
+    return (
+      <Form.Input
+        label={field.label}
+        placeholder={field.placeholder}
+        control={field.control}
+        rows={field.rows}
+        {...field.input}
+        error={field.meta.touched ? !!field.meta.error : false}
+      />
     );
   }
-  onSubmit(values){
+  onSubmit(values) {
     //this === component
     console.log(values);
+    this.props.savePost(values);
   }
   render() {
-    console.log(this.props);
-
     const { handleSubmit } = this.props;
     return (
       <Container>
@@ -68,10 +67,12 @@ class NewPost extends Component {
           <Grid columns={2}>
             <Grid.Row>
               <Grid.Column floated="left">
-                <Button primary 
-                        animated 
-                        type="submit"
-                        onClick={handleSubmit(this.onSubmit.bind(this))}>
+                <Button
+                  primary
+                  animated
+                  type="submit"
+                  onClick={handleSubmit(this.onSubmit.bind(this))}
+                >
                   <Button.Content visible>Submit</Button.Content>
                   <Button.Content hidden>
                     <Icon name="save" />
@@ -118,4 +119,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: "PostsNewForm"
-})(NewPost);
+})(connect(null,{savePost})(NewPost));
