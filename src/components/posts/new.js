@@ -9,19 +9,21 @@ import {
   Divider,
   Icon,
   Grid,
-  Header
+  Header,
+  Message
 } from "semantic-ui-react";
 
 class NewPost extends Component {
   renderField(field) {
-    return (
-      <Form.Input
-        label={field.label}
-        placeholder={field.placeholder}
-        control={field.control}
-        rows={field.rows}
-        {...field.input}
-      />
+    return (    
+        <Form.Input
+          label={field.label}
+          placeholder={field.placeholder}
+          control={field.control}
+          rows={field.rows}
+          {...field.input}
+          error={!!field.meta.error}
+        />              
     );
   }
   render() {
@@ -91,11 +93,11 @@ function validate(values) {
   if (!values.title || values.title.length < 3) {
     errors.title = "Enter a title that is at least 3 characters long!";
   }
-  if(!values.categories){
+  if (!values.categories) {
     errors.categories = "Enter some categories!";
   }
 
-  if(!values.content){
+  if (!values.content) {
     errors.content = "Enter content for the Blog post!";
   }
   //if errors is empty form is good to submit
