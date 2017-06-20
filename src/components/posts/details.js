@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchPost } from "../../actions";
+import { fetchPost, deletePost } from "../../actions";
 import { Container, Header, Divider, Icon, Button } from "semantic-ui-react";
 import Logo from "../app/logo.svg";
 
 class PostDetails extends Component {
-  componentDidMount() {
-    if (!this.props.post) {
+  componentDidMount() {    
       const id = this.props.match.params.id;
-      this.props.fetchPost(id);
-    }
+      this.props.fetchPost(id);    
   }
-
+  onDeleteClick = () => {
+    const { id } = this.props.match.params;
+    this.props.deletePost(id, () => {
+      this.props.history.push("/");
+    });
+  };
   render() {
     if (!this.props.post) {
       return <div>Loading...</div>;
@@ -30,7 +33,12 @@ class PostDetails extends Component {
               </Button.Content>
             </Button>
           </Link>
-          <Button floated="right" color="red" animated>
+          <Button
+            floated="right"
+            color="red"
+            animated
+            onClick={this.onDeleteClick}
+          >
             <Button.Content visible>
               <Icon name="trash" />
             </Button.Content>
@@ -58,4 +66,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchPost })(PostDetails);
+export default connect(mapStateToProps, { fetchPost, deletePost })(PostDetails);

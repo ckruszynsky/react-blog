@@ -7,6 +7,8 @@ const REQUEST_URL = `${ROOT_URL}/posts${API_KEY}`;
 export const FETCH_POSTS = "fetch_posts";
 export const FETCH_POST = "fetch_post";
 export const SAVE_POST = "save_post";
+export const DELETE_POST = "delete_post";
+
 
 export const fetchPosts = () => {
   const request = axios.get(REQUEST_URL);
@@ -25,11 +27,21 @@ export const savePost = (values, callback) => {
   };
 };
 
-export const fetchPost = id => {
-  
+export const fetchPost = id => {  
   const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
   return {
     type: FETCH_POST,
     payload: request
+  };
+};
+
+
+export const deletePost = (id, callback) => {
+  
+  const request = axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+      .then(() => callback());
+  return {
+    type: DELETE_POST,
+    payload: id
   };
 };

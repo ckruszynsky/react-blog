@@ -9,6 +9,7 @@ import ListItem from "./list-item";
 
 class PostList extends Component {
   componentDidMount() {
+    console.log(`fetching posts`);
     this.props.fetchPosts();
   }
   renderPosts() {
